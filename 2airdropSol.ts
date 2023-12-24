@@ -26,3 +26,5 @@ const main = async () => {
   balance = await getBalanceInSol(publicKey);
   console.log("BALANCE AFTER: ", balance);
 };
+
+// main()

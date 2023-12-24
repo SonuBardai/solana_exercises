@@ -21,3 +21,5 @@ const main = () => {
   );
   console.log(`✅ Finished!`);
 };
+
+// main()
