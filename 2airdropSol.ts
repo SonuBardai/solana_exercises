@@ -4,8 +4,8 @@ import { getBalanceInSol } from "./1connection";
 
 export const airDrop = async (address: PublicKey, lamports: number) => {
   const connection = new Connection(
-    // ADDRESS,
-    clusterApiUrl("devnet"),
+    ADDRESS,
+    // clusterApiUrl("devnet"),
     "confirmed"
   );
 

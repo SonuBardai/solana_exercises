@@ -14,4 +14,4 @@ const main = () => {
   airDrop(tokenMintWallet.publicKey, 2 * LAMPORTS_PER_SOL);
 };
 
-main();
+// main();
