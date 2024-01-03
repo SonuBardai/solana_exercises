@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@solana/spl-token": "^0.3.9",
     "@solana/web3.js": "^1.87.6",
     "dotenv": "^16.3.1",
     "esrun": "^3.2.26",
