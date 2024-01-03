@@ -22,6 +22,7 @@ const ping = async (payer: Keypair) => {
       },
     ],
     programId: programId,
+    data: Buffer.alloc(0), // this program does not require any data to be passed into the call
   });
   transaction.add(instruction);
   const signature = await sendAndConfirmTransaction(connection, transaction, [payer]);

@@ -2,7 +2,7 @@ import { Connection, LAMPORTS_PER_SOL, PublicKey, clusterApiUrl } from "@solana/
 import { ADDRESS, PUBLIC_KEY } from "./config";
 import { getBalanceInSol } from "./1connection";
 
-const airDrop = async (address: PublicKey, lamports: number) => {
+export const airDrop = async (address: PublicKey, lamports: number) => {
   const connection = new Connection(
     // ADDRESS,
     clusterApiUrl("devnet"),
