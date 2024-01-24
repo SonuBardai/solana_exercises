@@ -32,4 +32,4 @@ const main = () => sayHello();
 > Program returned success
 */
 
-main();
+// main();
