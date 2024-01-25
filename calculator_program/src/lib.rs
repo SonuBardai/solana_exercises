@@ -14,12 +14,24 @@ struct CalculatorAccount {
     number: u32,
 }
 
-#[derive(BorshSerialize, BorshDeserialize)]
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
 enum Operator {
     Add,
     Sub,
     Mul,
     Div,
+}
+
+impl std::fmt::Display for Operator {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let symbol = match self {
+            Operator::Add => "+",
+            Operator::Sub => "-",
+            Operator::Mul => "*",
+            Operator::Div => "/",
+        };
+        write!(f, "{}", symbol)
+    }
 }
 
 #[derive(BorshSerialize, BorshDeserialize)]
@@ -49,37 +61,18 @@ fn process_instruction(
         .map_err(|_| ProgramError::InvalidInstructionData)?;
 
     msg!(&format!("Original number ({})", calculator_account.number));
+    msg!(&format!(
+        "Performing operation ({:?} {} {})",
+        calculator_instruction.operator, calculator_account.number, calculator_instruction.operand
+    ));
     match calculator_instruction.operator {
-        Operator::Add => {
-            msg!(&format!(
-                "Performing operation ({} + {})",
-                calculator_account.number, calculator_instruction.operand
-            ));
-            calculator_account.number += calculator_instruction.operand;
-        }
-        Operator::Sub => {
-            msg!(&format!(
-                "Performing operation ({} - {})",
-                calculator_account.number, calculator_instruction.operand
-            ));
-            calculator_account.number -= calculator_instruction.operand;
-        }
-        Operator::Mul => {
-            msg!(&format!(
-                "Performing operation ({} * {})",
-                calculator_account.number, calculator_instruction.operand
-            ));
-            calculator_account.number *= calculator_instruction.operand;
-        }
+        Operator::Add => calculator_account.number += calculator_instruction.operand,
+        Operator::Sub => calculator_account.number -= calculator_instruction.operand,
+        Operator::Mul => calculator_account.number *= calculator_instruction.operand,
         Operator::Div => {
             if calculator_instruction.operand == 0 {
-                msg!("Can't divide by 0!");
                 return Err(ProgramError::InvalidInstructionData);
             } else {
-                msg!(&format!(
-                    "Performing operation ({} / {})",
-                    calculator_account.number, calculator_instruction.operand
-                ));
                 calculator_account.number /= calculator_instruction.operand;
             }
         }
